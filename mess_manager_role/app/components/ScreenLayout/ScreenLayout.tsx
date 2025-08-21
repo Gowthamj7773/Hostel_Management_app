@@ -1,0 +1,70 @@
+import React, {useEffect} from "react";
+import {Image,Pressable, StatusBar, Text, View, StyleSheet, Platform, KeyboardAvoidingView,} from "react-native";
+import {SafeAreaView} from "react-native-safe-area-context";
+// import changeNavigationBarColor from "react-native-navigation-bar-color";
+import {router} from "expo-router";
+
+const GoBackArrow = require("../../../assets/icons/backarrow.png");
+const HEADER_HEIGHT = "7%";
+
+interface ScreenLayoutProps {
+  title: string;
+  children?: React.ReactNode;
+}
+
+const ScreenLayout: React.FC<ScreenLayoutProps> = ({title, children}) => {
+  return (
+    <View style={styles.root}>
+      <StatusBar barStyle="light-content" />
+      <View style={styles.safe}>
+        {/* Header */}
+        <View style={styles.header}>
+          <Pressable onPress={() => router.back()}>
+            <Image source={GoBackArrow} style={styles.backIcon} />
+          </Pressable>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+
+        {/* Keyboard avoiding container */}
+        <SafeAreaView
+          style={{flex: 1, backgroundColor: "white"}}
+          edges={["bottom"]}
+          // style={styles.flex}
+          // behavior={Platform.OS === "ios" ? "padding" : undefined}
+        >
+          {children}
+        </SafeAreaView>
+      </View>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  root: {height: "100%", backgroundColor: "#4A5B9B"},
+  safe: {
+    height: "100%",
+    marginTop: 30,
+    backgroundColor: "white",
+    paddingBottom: 20,
+  },
+  flex: {flex: 1, backgroundColor: "white"},
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    height: HEADER_HEIGHT,
+    backgroundColor: "#4A5B9B",
+  },
+  backIcon: {width: 36, height: 36, resizeMode: "contain"},
+  title: {
+    flex: 1,
+    textAlign: "center",
+    color: "white",
+    fontSize: 20,
+    fontWeight: "600",
+    marginRight: 36,
+    alignSelf: "center",
+  },
+});
+
+export default ScreenLayout;
