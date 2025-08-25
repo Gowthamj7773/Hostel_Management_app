@@ -1,52 +1,119 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView, Image, Pressable } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Image, Pressable, FlatList } from 'react-native';
 import ScreenLayout from '@/app/components/ScreenLayout/ScreenLayout';
-const approvedTick = require('../../../assets/icons/approvedtick.png')
+import ComplaintCard from './ComplaintCard'
+
 
 export default function ComplaintsScreen() {
 
-    const [seeMore,setSeeMore] = useState(false);
-    // Complaint Card 
-function ComplaintCard({index,name,hostel,floor,date,issueType,issue,status}){
-    return(
-    <Pressable onPress={()=>setSeeMore(prev => !prev)} className="bg-white p-4 mt-3 rounded-lg shadow border border-gray-200">
-        <View className="flex-row justify-between items-start">
-            <View>
-                <Text className="text-gray-900 font-semibold">
-                    {index}. <Text>{name}</Text>
-                </Text>
-                <Text className="text-gray-500 text">
-                    {hostel} <Text>({floor})</Text>
-                </Text>
-            </View>
-            <Text className="text-gray-500 text font-semibold">{date}</Text>
-        </View>
-        <Text className="mt-3 text-gray-900 font-semibold">{issueType}</Text>
-        {
-            seeMore ? 
-            <Text className="mt-1 text-gray-600 text leading-5">{issue}</Text> :
-            <Text className="mt-1 text-gray-600 text leading-5">{issue.slice(0,50)}<Text>...</Text></Text>
-        }
-        {
-            seeMore ? 
-        <View className="bg-bggreen self-end px-3 py-1 rounded-lg mt-3">
-            <Text className="text-lettergreen font-medium">{status}</Text>
-        </View> :
-        <View className="self-end px-3 py-1 rounded-lg mt-3 flex-row items-center">
-            <Text className='text-lettergreen'>Resolved</Text>
-            <Image className='w-5 h-5 ml-2' source={approvedTick}/>
-        </View>
-        }
+const complaint = [
+    {
+        name: 'LOKITHA K',
+        hostel: 'Ganga',
+        floor: 'ground floor',
+        date: '07-01-2025',
+        issueType: 'others',
+        issue: 'I am facing issues with lack of clean drinking water.',
+        status: 'resolved',
+    },
+    {
+        name: 'ARJUN S',
+        hostel: 'Yamuna',
+        floor: 'first floor',
+        date: '08-01-2025',
+        issueType: 'maintenance',
+        issue: 'The ceiling fan in my room is not working.',
+        status: 'pending',
+    },
+    {
+        name: 'PRIYA R',
+        hostel: 'Saraswati',
+        floor: 'second floor',
+        date: '09-01-2025',
+        issueType: 'cleanliness',
+        issue: 'The washrooms are not cleaned regularly.',
+        status: 'resolved',
+    },
+    {
+        name: 'RAHUL M',
+        hostel: 'Krishna',
+        floor: 'third floor',
+        date: '10-01-2025',
+        issueType: 'food',
+        issue: 'The food served in the mess is cold and tasteless.',
+        status: 'pending',
+    },
+    {
+        name: 'ANJALI P',
+        hostel: 'Ganga',
+        floor: 'first floor',
+        date: '11-01-2025',
+        issueType: 'water',
+        issue: 'There is no hot water in the bathrooms.',
+        status: 'pending',
+    },
+    {
+        name: 'VIKRAM T',
+        hostel: 'Yamuna',
+        floor: 'ground floor',
+        date: '12-01-2025',
+        issueType: 'electricity',
+        issue: 'Frequent power cuts in the evening.',
+        status: 'pending',
+    },
+    {
+        name: 'SNEHA L',
+        hostel: 'Saraswati',
+        floor: 'second floor',
+        date: '13-01-2025',
+        issueType: 'security',
+        issue: 'The main gate security is often absent at night.',
+        status: 'resolved',
+    },
+    {
+        name: 'ROHAN D',
+        hostel: 'Krishna',
+        floor: 'third floor',
+        date: '14-01-2025',
+        issueType: 'noise',
+        issue: 'Loud noise from the common room late at night.',
+        status: 'pending',
+    },
+    {
+        name: 'MEERA S',
+        hostel: 'Ganga',
+        floor: 'ground floor',
+        date: '15-01-2025',
+        issueType: 'internet',
+        issue: 'Wi-Fi is not working in my room.',
+        status: 'resolved',
+    },
+    {
+        name: 'KARAN J',
+        hostel: 'Yamuna',
+        floor: 'first floor',
+        date: '16-01-2025',
+        issueType: 'others',
+        issue: 'Broken window in the corridor.',
+        status: 'resolved',
+    },
+    ]
 
-    </Pressable>
-    );
-}
     return (
         <ScreenLayout title='Complaints'>
     <View className="flex-1 bg-white">
-        <ScrollView className="p-4">
-            <ComplaintCard index={1} name={'LOKITHA K'} hostel={'Ganga'} floor={'ground floor'} date={'07-01-2025'} issueType={'others'} issue={'I am facing issues with lack of clean drinking water I am facing issues with lack of clean drinking water I am facing issues with lack of clean drinking water'} status={'Resloved'}/>
-        </ScrollView>
+        <FlatList  className='mb-10 mt-5'
+        data={complaint}
+        renderItem={({item,index})=>
+
+        <ComplaintCard index={index+1} name={item.name}
+        hostel={item.hostel} floor={item.floor}
+        date={item.date} issueType={item.issueType}
+        issue={item.issue} status={item.status}
+        />}
+        
+        keyExtractor={(_,index) => index.toString()}
+        />
     </View>
     </ScreenLayout>
     );
