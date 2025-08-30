@@ -81,7 +81,7 @@ return (
     animationType="fade"
     onRequestClose={onClose}
     >
-    <View className="flex-1 bg-black/40 justify-center items-center">
+    <View className="flex-1 bg-black/40 justify-center items-center z-50">
         <View className="bg-white rounded-lg w-[90%] h-[75%] p-5">
         {/* Header */}
         <View className="flex-row justify-between items-center mb-4">

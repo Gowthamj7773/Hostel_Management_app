@@ -1,21 +1,20 @@
 import React from 'react';
-import { View, Text, Pressable, ScrollView ,Image} from 'react-native';
-import { 
-  HomeIcon, 
-  UserGroupIcon, 
-  UserIcon,
-  DocumentTextIcon,
-  CalendarIcon,
-  ClipboardDocumentListIcon,
-  CubeIcon,
-  UserPlusIcon
-} from 'react-native-heroicons/outline';
+import { View, Text, Pressable, ScrollView ,Image, BackHandler} from 'react-native';
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
+import Notification from '@/app/components/Notification/Notification';
 
 //image import
 const mapWarden = require('../../../assets/icons/mapWarden.png')
-
+const bed = require('../../../assets/icons/bed.png')
+const student = require('../../../assets/icons/student.png')
+const wardenDetails = require('../../../assets/icons/wardenDetails.png')
+const calendar = require('../../../assets/icons/calendar.png')
+const applyLeave = require('../../../assets/icons/applyleave.png')
+const fileComplaint = require('../../../assets/icons/filecomplaint.png')
+const requestPurchase = require('../../../assets/icons/requestPurchase.png')
+const assignWork = require('../../../assets/icons/assignWork.png')
+const backArrowRounded =  require('../../../assets/icons/backarrowrounded.png')
 
 type TaskCardProps = {
 number: number;
@@ -137,136 +136,140 @@ const taskData: Record<string, TaskCardProps[]> = {
 
 
 export default function MyDesk() {
-    const [showNotification, setShowNotification] = useState(false);
-return (
-<View className="flex-1 bg-white pt-[48px] px-[20px]">
+const [showNotification, setShowNotification] = useState(false);
 
-        <View className="flex-row justify-between items-center mb-[24px]">
-        <Pressable
-        onPress={() => router.push("/Screen/Profile/Profile")}>
-        <Image
-            source={require('../../../assets/icons/profile.png')}
-            className="w-[42px] h-[42px] rounded-full"
-        />
-        </Pressable>
-        <View className="flex-row">
-            <Pressable className="mr-3 bg-[#2A366333] rounded-full w-[42px] h-[42px] items-center justify-center relative" >
+useEffect(() => {
+    const onBackPress = () => {
+    if (showNotification) {
+        setShowNotification(false);
+        return true;
+    }
+    return false;
+    };
+    const backHandler = BackHandler.addEventListener(
+    "hardwareBackPress",
+    onBackPress
+    );
+    return () => backHandler.remove();
+}, [showNotification]);
+return (
+    <View className="flex-1 bg-white pt-[48px] px-[20px]">
+            <Notification
+                visible={showNotification}
+                onClose={() => setShowNotification(false)}
+                notifications={notifications}
+            />
+            <View className="flex-row justify-between items-center mb-[24px]">
+            <Pressable onPress={() => router.back()}>
+                <Image source={backArrowRounded} className="w-[42px] h-[42px] rounded-full"/>
+            </Pressable>
+            <View className="flex-row">
+                <Pressable className="mr-3 bg-[#2A366333] rounded-full w-[42px] h-[42px] items-center justify-center relative" >
+                    <Image
+                        source={mapWarden}
+                        className="w-[24px] h-[24px]"
+                    />
+                </Pressable>
+
+                <Pressable
+                onPress={() => setShowNotification(true)}
+                className="bg-[#2A366333] rounded-full w-[40px] h-[40px] items-center justify-center relative"
+                >
                 <Image
-                    source={mapWarden}
+                    source={require("../../../assets/icons/announce.png")}
                     className="w-[24px] h-[24px]"
                 />
-            </Pressable>
-
+                {notifications.length > 0 && (
+                    <View className="bg-red-600 w-[10px] h-[10px] rounded-full absolute top-[0px] right-[0px]" />
+                )}
+                </Pressable>
+            </View>
+        </View>
+        {/* Top Cards Row */}
+        <View className="flex-row flex-wrap justify-around mb-6">
+            {/* Vacant Cot Card */}
             <Pressable
-            onPress={() => setShowNotification(true)}
-            className="bg-[#2A366333] rounded-full w-[40px] h-[40px] items-center justify-center relative"
+            onPress={() => router.push('/Layout')}
+            className="flex-row items-center 
+            bg-secondary rounded-[8px] px-[16px] 
+            py-[12px] w-[155px] justify-center"
             >
-            <Image
-                source={require("../../../assets/icons/announce.png")}
-                className="w-[24px] h-[24px]"
-            />
-            {notifications.length > 0 && (
-                <View className="bg-red-600 w-[10px] h-[10px] rounded-full absolute top-[0px] right-[0px]" />
-            )}
+                <Image className="h-5 w-6" source={bed} />
+                <Text className="ml-[8px] font-medium text-[#64748B] text-[14px]">
+                    {} Vacant cot 
+                </Text>
+            </Pressable>
+
+            {/* Student Details Card */}
+            <Pressable
+            onPress={() => router.push('/components/StudentDetails/StudentDetails')}
+            className="flex-row items-center 
+            bg-secondary rounded-[8px] px-[16px] 
+            py-[12px] w-[155px] justify-center"
+            >
+                <Image className="h-6 w-6" source={student} />
+                <Text className="ml-[8px] font-medium text-[#64748B] text-[14px]">
+                    Student details
+                </Text>
+            </Pressable>
+        </View>
+                    {/* Warden Details Card */}
+            <Pressable
+            onPress={() => router.push('')}
+            className="flex-row items-center ml-3
+            bg-secondary rounded-[8px] px-[16px] 
+            py-[12px] w-[155px] justify-center"
+            >
+                <Image className="h-5 w-5" source={wardenDetails} />
+                <Text className="ml-[8px] font-medium text-[#64748B] text-[14px]">
+                    Warden details
+                </Text>
+            </Pressable>
+
+        {/* My Desk and My Calendar Row */}
+        <View className="flex-row justify-between items-center my-4 ">
+            <View className="flex-1">
+                <Text className="text-lg font-medium text-gray-500">My desk</Text>
+            </View>
+            <View className="border p-1 px-2 rounded-lg border-gray-300">
+                <Pressable className="flex-row items-center gap-2">
+                <Text className="text-lg font-medium text-primary">My calendar</Text>
+                <Image className='w-5 h-5' source={calendar}/>
+                </Pressable>
+            </View>
+        </View>
+
+        <View className="flex-row items-center justify-around flex-wrap gap-3 mb-4 ">
+            {/* Apply Leave */}
+            <Pressable onPress={()=>router.push('/components/Applyleave/LeaveApply')} style={{ shadowColor: '#6B7280', shadowOffset: { width: -2, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 5 }} className="my-5 flex items-center justify-center bg-white px-2 rounded-xl border border-white">
+                <View className='flex items-center justify-center p-6'>
+                    <Image className='h-7 w-7' source={applyLeave}/>
+                    <Text className="text-lg  text-primary text-center mt-4">Apply Leave</Text>
+                </View>
+            </Pressable>
+
+            {/* File Complaint */}
+            <Pressable onPress={()=>router.push('/components/FileComplaints/FileComplaints')} style={{ shadowColor: '#6B7280', shadowOffset: { width: -2, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 5 }} className="my-5 flex items-center justify-center bg-white px-2 rounded-xl border border-white">
+                <View className='flex items-center justify-center p-6'>
+                    <Image className='h-7 w-7' source={fileComplaint}/>
+                    <Text className="text-lg  text-primary text-center mt-4">File complaint</Text>
+                </View>
+            </Pressable>
+
+            <Pressable onPress={()=>router.push('/components/Request_purchase/RequestPurchase')} style={{ shadowColor: '#6B7280', shadowOffset: { width: -2, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 5 }} className="my-5 flex items-center justify-center bg-white px-2 rounded-xl border border-white">
+                <View className='flex items-center justify-center p-2 my-5'>
+                    <Image className='h-7 w-7' source={requestPurchase}/>
+                    <Text className=" text-primary text-center mt-4">Request Purchase</Text>
+                </View>
+            </Pressable>
+
+            <Pressable style={{ shadowColor: '#6B7280', shadowOffset: { width: -2, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4, elevation: 5 }} className="my-5 flex items-center justify-center bg-white px-2 rounded-xl border border-white">
+                <View className='flex items-center justify-center p-6'>
+                    <Image className='h-7 w-7' source={assignWork}/>
+                    <Text className="text-lg  text-primary text-center mt-4">Assign work</Text>
+                </View>
             </Pressable>
         </View>
     </View>
-    {/* Top Cards Row */}
-    <View className="flex-row gap-3 mb-6">
-    {/* Vacant Cot Card */}
-    <Pressable className="flex-1 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-        <View className="flex-row items-center gap-3">
-        <View className="bg-blue-100 p-3 rounded-xl">
-            <HomeIcon size={24} color="#3B82F6" />
-        </View>
-        <View className="flex-1">
-            <Text className="text-2xl font-bold text-gray-800">500</Text>
-            <Text className="text-sm text-gray-500">Vacant cot</Text>
-        </View>
-        </View>
-    </Pressable>
-
-    {/* Student Details Card */}
-    <Pressable className="flex-1 bg-white p-4 rounded-2xl shadow-sm border border-gray-100">
-        <View className="flex-row items-center gap-3">
-        <View className="bg-blue-100 p-3 rounded-xl">
-            <UserGroupIcon size={24} color="#3B82F6" />
-        </View>
-        <View className="flex-1">
-            <Text className="text-base font-semibold text-gray-800">Student details</Text>
-        </View>
-        </View>
-    </Pressable>
-    </View>
-
-    {/* Warden Details Card */}
-    <Pressable className="bg-white p-4 rounded-2xl shadow-sm border border-gray-100 mb-6">
-    <View className="flex-row items-center gap-3">
-        <View className="bg-blue-100 p-3 rounded-xl">
-        <UserIcon size={24} color="#3B82F6" />
-        </View>
-        <Text className="text-base font-semibold text-gray-800">Warden details</Text>
-    </View>
-    </Pressable>
-
-    {/* My Desk and My Calendar Row */}
-    <View className="flex-row justify-between items-center mb-4">
-    <View className="flex-1">
-        <Text className="text-base font-medium text-gray-700">My desk</Text>
-    </View>
-    <View className="flex-1">
-        <Pressable className="flex-row items-center gap-2">
-        <Text className="text-base font-medium text-gray-700">My calendar</Text>
-        <CalendarIcon size={20} color="#6B7280" />
-        </Pressable>
-    </View>
-    </View>
-
-    {/* Action Cards Grid */}
-    <View className="flex-row gap-3 mb-4">
-    {/* Apply Leave */}
-    <Pressable className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <View className="items-center gap-3">
-        <View className="bg-gray-100 p-4 rounded-xl">
-            <DocumentTextIcon size={32} color="#6B7280" />
-        </View>
-        <Text className="text-base font-medium text-gray-700 text-center">Apply Leave</Text>
-        </View>
-    </Pressable>
-
-    {/* File Complaint */}
-    <Pressable className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <View className="items-center gap-3">
-        <View className="bg-gray-100 p-4 rounded-xl">
-            <ClipboardDocumentListIcon size={32} color="#6B7280" />
-        </View>
-        <Text className="text-base font-medium text-gray-700 text-center">File complaint</Text>
-        </View>
-    </Pressable>
-    </View>
-
-    {/* Bottom Action Cards Row */}
-    <View className="flex-row gap-3">
-    {/* Request Purchase */}
-    <Pressable className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <View className="items-center gap-3">
-        <View className="bg-gray-100 p-4 rounded-xl">
-            <CubeIcon size={32} color="#6B7280" />
-        </View>
-        <Text className="text-base font-medium text-gray-700 text-center">Request purchase</Text>
-        </View>
-    </Pressable>
-
-    {/* Assign Work */}
-    <Pressable className="flex-1 bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-        <View className="items-center gap-3">
-        <View className="bg-gray-100 p-4 rounded-xl">
-            <UserPlusIcon size={32} color="#6B7280" />
-        </View>
-        <Text className="text-base font-medium text-gray-700 text-center">Assign work</Text>
-        </View>
-    </Pressable>
-    </View>
-</View>
 );
 };

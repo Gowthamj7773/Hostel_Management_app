@@ -139,6 +139,331 @@ const taskData: Record<string, TaskCardProps[]> = {
 ],
 };
 
+// hostel layout 
+const layoutJson = {
+    "hostel_id": 1,
+    "count": 48, // Total floors across all hostels (6 boys + 6 girls hostels × 4 floors each)
+    "hostels": [
+        // Boys Hostels
+        {
+            "hostel_name": "Sapphire",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/0.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/1.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/2.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/3.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Coral",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/4.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/5.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/6.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/7.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Ruby",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/8.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/9.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/10.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/11.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Emerald",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/12.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/13.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/14.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/15.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Pearl",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/16.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/17.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/18.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/19.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Diamond",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/20.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/21.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/22.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/23.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        // Girls Hostels
+        {
+            "hostel_name": "Ganga",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/0.jpg",
+                    "vacant": 1
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/1.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/2.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/3.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Yamuna",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/4.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/5.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/6.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/7.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Kaveri",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/8.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/9.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/10.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/11.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Narmadha",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/12.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/13.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/14.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/15.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "North Bhavani",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/16.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/17.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/18.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/19.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "South Bhavani",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/20.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/21.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/22.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/23.jpg",
+                    "vacant": 5
+                }
+            ]
+        }
+    ]
+};
+
+const role = 'GirlsHostelManager' // assuming the role
+const totalVacant = layoutJson.hostels.filter(h => h.gender === (role === 'BoysHostelManager' ? 'boys' : 'girls')).reduce((sum, hostel) => sum + hostel.floors.reduce((floorSum, floor) => floorSum + floor.vacant, 0), 0);
+
 export default function Home() {
 const [showNotification, setShowNotification] = useState(false);
 const [showMenuModal, setShowMenuModal] = useState(false); // ✅ state for menu modal
@@ -200,7 +525,7 @@ return (
     <View className="mt-6 flex-row flex-wrap gap-5 justify-between mb-[24px]">
         <Pressable
         className="flex-row items-center 
-        bg-[#F1F5F9] rounded-[8px] px-[16px] py-[12px] w-[155px] justify-center"
+        bg-secondary rounded-[8px] px-[16px] py-[12px] w-[155px] justify-center"
         >
         <CalendarDaysIcon size={20} color="#64748B" />
         <Text className="ml-[8px] font-medium text-[#64748B] text-[14px]">
@@ -211,7 +536,7 @@ return (
         <Pressable
         onPress={() => router.push("/Screen/MyDesk/MyDesk")}
         className="flex-row items-center 
-        bg-[#F1F5F9] rounded-[8px] px-[16px] 
+        bg-secondary rounded-[8px] px-[16px] 
         py-[12px] w-[155px] justify-center"
         >
             <FolderIcon size={20} color="#64748B" />
@@ -221,21 +546,21 @@ return (
         </Pressable>
 
         <Pressable
-        onPress={() => router.push("/Screen/MyDesk/MyDesk")}
+        onPress={() => router.push('/Layout')}
         className="flex-row items-center 
-        bg-[#F1F5F9] rounded-[8px] px-[16px] 
+        bg-secondary rounded-[8px] px-[16px] 
         py-[12px] w-[155px] justify-center"
         >
             <Image className="h-5 w-6" source={bed} />
             <Text className="ml-[8px] font-medium text-[#64748B] text-[14px]">
-                {500} Vacant cot 
+                {totalVacant} Vacant cot 
             </Text>
         </Pressable>
 
         <Pressable
-        onPress={() => router.push("/Screen/MyDesk/MyDesk")}
+        onPress={() => router.push("/components/StudentDetails/StudentDetails")}
         className="flex-row items-center 
-        bg-[#F1F5F9] rounded-[8px] px-[16px] 
+        bg-secondary rounded-[8px] px-[16px] 
         py-[12px] w-[155px] justify-center"
         >
             <Image className="h-5 w-5" source={student}/>
@@ -247,7 +572,7 @@ return (
     </View>
     <View className="flex-row flex-wrap justify-between mt-6">
                 {/* work box */}
-    <Pressable onPress={() => router.push("/components/Request_purchase/RequestPurchase")}
+    <Pressable onPress={() => router.push("/components/PurchaseRequest/purchaseRequest")}
         className="items-center p-5 rounded-lg bg-white mb-4"
         style={{
         width: "48%",

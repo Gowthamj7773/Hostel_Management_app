@@ -10,18 +10,9 @@ FlatList,
 } from "react-native";
 import {CalendarDaysIcon, FolderIcon} from "react-native-heroicons/outline";
 import Notification from "../components/Notification/Notification";
-import MenuModal from "../components/MealMenu/MealMenuModal"; // ✅ Import menu modal
 import {router} from "expo-router";
 import LayoutCard from "../Screen/Layout/LayoutCard";
 
-//image import
-const  fileComplaint =  require( '../../assets/icons/filecomplaint.png')
-const approvals  = require( '../../assets/icons/approvals.png')
-const bed = require('../../assets/icons/bed.png');
-const student  = require('../../assets/icons/student.png')
-const purchaseRequest = require('../../assets/icons/purchaseRequest.png')
-const plus = require('../../assets/icons/plus.png')
-const mapWarden = require('../../assets/icons/mapWarden.png')
 
 type TaskCardProps = {
 number: number;
@@ -145,246 +136,337 @@ const taskData: Record<string, TaskCardProps[]> = {
 const role = 'GirlsHostelManager' // assuming role 
 
 // contains both boys and girls hostels layout
-const layoutJson =
-[
-{
-"boysHostel": {
-    "sapphire": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/0.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/1.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/2.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/3.jpg",
-        "vacant": 5
-    }
-    },
-    "coral": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/4.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/5.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/6.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/7.jpg",
-        "vacant": 5
-    }
-    },
-    "ruby": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/8.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/9.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/10.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/11.jpg",
-        "vacant": 5
-    }
-    },
-    "emerald": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/12.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/13.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/14.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/15.jpg",
-        "vacant": 5
-    }
-    },
-    "pearl": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/16.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/17.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/18.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/19.jpg",
-        "vacant": 5
-    }
-    },
-    "diamond": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/men/20.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/men/21.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/men/22.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/men/23.jpg",
-        "vacant": 5
-    }
-    }
-},
-"girlsHostel": {
-    "ganga": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/0.jpg",
-        "vacant": 1
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/1.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/2.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/3.jpg",
-        "vacant": 5
-    }
-    },
-    "yamuna": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/4.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/5.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/6.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/7.jpg",
-        "vacant": 5
-    }
-    },
-    "kaveri": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/8.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/9.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/10.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/11.jpg",
-        "vacant": 5
-    }
-    },
-    "narmadha": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/12.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/13.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/14.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/15.jpg",
-        "vacant": 5
-    }
-    },
-    "northBhavani": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/16.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/17.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/18.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/19.jpg",
-        "vacant": 5
-    }
-    },
-    "southBhavani": {
-    "G": {
-        "warden": "https://randomuser.me/api/portraits/women/20.jpg",
-        "vacant": 5
-    },
-    "1st": {
-        "warden": "https://randomuser.me/api/portraits/women/21.jpg",
-        "vacant": 5
-    },
-    "2nd": {
-        "warden": "https://randomuser.me/api/portraits/women/22.jpg",
-        "vacant": 5
-    },
-    "3rd": {
-        "warden": "https://randomuser.me/api/portraits/women/23.jpg",
-        "vacant": 5
-    }
-    }
-}
-}
-]
+const layoutJson = {
+    "hostel_id": 1,
+    "count": 48, // Total floors across all hostels (6 boys + 6 girls hostels × 4 floors each)
+    "hostels": [
+        // Boys Hostels
+        {
+            "hostel_name": "Sapphire",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/0.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/1.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/2.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/3.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Coral",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/4.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/5.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/6.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/7.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Ruby",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/8.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/9.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/10.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/11.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Emerald",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/12.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/13.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/14.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/15.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Pearl",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/16.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/17.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/18.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/19.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Diamond",
+            "gender": "boys",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/men/20.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/men/21.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/men/22.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/men/23.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        // Girls Hostels
+        {
+            "hostel_name": "Ganga",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/0.jpg",
+                    "vacant": 1
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/1.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/2.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/3.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Yamuna",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/4.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/5.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/6.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/7.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Kaveri",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/8.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/9.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/10.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/11.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "Narmadha",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/12.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/13.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/14.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/15.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "North Bhavani",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/16.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/17.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/18.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/19.jpg",
+                    "vacant": 5
+                }
+            ]
+        },
+        {
+            "hostel_name": "South Bhavani",
+            "gender": "girls",
+            "floors": [
+                {
+                    "floor": "G",
+                    "warden": "https://randomuser.me/api/portraits/women/20.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "1st",
+                    "warden": "https://randomuser.me/api/portraits/women/21.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "2nd",
+                    "warden": "https://randomuser.me/api/portraits/women/22.jpg",
+                    "vacant": 5
+                },
+                {
+                    "floor": "3rd",
+                    "warden": "https://randomuser.me/api/portraits/women/23.jpg",
+                    "vacant": 5
+                }
+            ]
+        }
+    ]
+};
 
-const filteredLayoutJson = role === 'BoysHostelManager' ? layoutJson[0].boysHostel : layoutJson[0].girlsHostel
+const targetGender = role === 'BoysHostelManager' ? 'boys' : 'girls';
+const filteredLayoutJson = layoutJson.hostels.filter(hostel => hostel.gender === targetGender);
 
 export default function Layout() {
 const [showNotification, setShowNotification] = useState(false);
-const [showMenuModal, setShowMenuModal] = useState(false); // ✅ state for menu modal
 
 useEffect(() => {
-    const onBackPress = () => {
+    const onBackPress = () => { 
     if (showNotification) {
         setShowNotification(false);
-        return true;
-    }
-    if (showMenuModal) {
-        setShowMenuModal(false);
         return true;
     }
     return false;
@@ -394,10 +476,15 @@ useEffect(() => {
     onBackPress
     );
     return () => backHandler.remove();
-}, [showNotification, showMenuModal]);
+}, [showNotification]);
 
 return (
     <View className="flex-1 bg-white pt-[48px] px-[20px]">
+            <Notification
+                visible={showNotification}
+                onClose={() => setShowNotification(false)}
+                notifications={notifications}
+            />
     {/* Top Bar */}
         <View className="flex-row justify-between items-center mb-[24px]">
             <Pressable
@@ -422,26 +509,26 @@ return (
                 </Pressable>
         </View>
 
-    {(() => {
-    const hostelData =  Object.entries(filteredLayoutJson).map(([hostelName, value]) => ({
-        hostelName,
-        hostelDetail: value
+{(() => {
+    const hostelData = filteredLayoutJson.map((hostel, index) => ({
+        hostelName: hostel.hostel_name,
+        hostelDetail: hostel
     }));
     
     return (
         <FlatList 
-        data={hostelData}
-        keyExtractor={(item, index) => `${item.hostelName}-${index}`}
-        showsVerticalScrollIndicator={false}
-        renderItem={({item}) => (
-            <LayoutCard 
-            hostelName={item.hostelName} 
-            hostelDetail={item.hostelDetail} 
-            />
-        )}
+            data={hostelData}
+            keyExtractor={(item, index) => `${item.hostelName}-${index}`}
+            showsVerticalScrollIndicator={false}
+            renderItem={({item}) => (
+                <LayoutCard 
+                    hostelName={item.hostelName} 
+                    hostelDetail={item.hostelDetail} 
+                />
+            )}
         />
     );
-    })()}
+})()}
 
     </View>
 );
